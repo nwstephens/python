@@ -1,0 +1,35 @@
+---
+title: "Python"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+library(reticulate)
+use_python("/usr/local/bin/python")
+readr::write_csv(nycflights13::flights,path = "flights.csv")
+```
+
+```{python}
+import pandas
+flights = pandas.read_csv("flights.csv")
+flights = flights[flights['dest'] == "ORD"]
+flights = flights[['carrier', 'dep_delay', 'arr_delay']]
+flights = flights.dropna()
+```
+
+```{r, fig.width=7, fig.height=3}
+library(ggplot2)
+ggplot(py$flights, aes(carrier, arr_delay)) + geom_point() + geom_jitter()
+```
+
+```{r}
+library(tidyverse)
+flights <- read_csv("flights.csv") %>%
+  filter(dest == "ORD") %>%
+  select(carrier, dep_delay, arr_delay) %>%
+  na.omit()
+```
+
+```{python}
+print(r.flights.head())
+```
