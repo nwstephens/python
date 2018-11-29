@@ -3,10 +3,11 @@ title: "Python"
 output: html_notebook
 ---
 
+
 ```{r setup, include=FALSE}
 library(reticulate)
-use_python("/usr/local/bin/python")
-readr::write_csv(nycflights13::flights,path = "flights.csv")
+use_python("/anaconda3/bin/python")
+readr::write_csv(nycflights13::flights, path = "flights.csv")
 ```
 
 ```{python}
